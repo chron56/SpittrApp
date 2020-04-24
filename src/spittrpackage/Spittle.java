@@ -3,12 +3,11 @@ package spittrpackage;
 public class Spittle {
 
     private int id;
-    private int spitterId;
     private String text;
+    private Spitter spitter;
 
-    public Spittle(int anId, int anSpitterId, String aText){
+    public Spittle(int anId, String aText){
         this.id = anId;
-        this.spitterId = anSpitterId;
         this.text = aText;
     }
 
@@ -20,12 +19,12 @@ public class Spittle {
         return id;
     }
 
-    public void setSpitterId(int anId){
-        this.spitterId = anId;
+    public void setSpitter(Spitter aSpitter){
+        this.spitter = aSpitter;
     }
 
-    public int getSpitterId(){
-        return spitterId;
+    public Spitter getSpitter(){
+        return spitter;
     }
 
     public void setText(String aText){

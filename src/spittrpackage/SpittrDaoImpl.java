@@ -1,9 +1,10 @@
 package spittrpackage;
 
 import java.sql.*;
+import java.util.List;
 import java.util.ArrayList;
 
-public class DBHandler {
+public class SpittrDaoImpl implements SpittrDao {
 
     private String url="jdbc:mysql://localhost/spitterdb?user=user";
     private Connection con;
@@ -43,29 +44,29 @@ public class DBHandler {
         }
     }
 
-    public Spitter getSpitterFromDB(String aString){
-        String query="SELECT * FROM `spitters` WHERE Username='"+aString+"'";
-        int tempId=0;
+    public Spitter getSpitterFromDB(int anId){
+        String query="SELECT * FROM `spitters` WHERE ID='"+anId+"'";
+        String tempUsername=null;
         try {
             stmt = con.createStatement();
             res = stmt.executeQuery(query);
             if(res.next()){
-                tempId=res.getInt("ID");
+                tempUsername=res.getString("Username");
             }
             stmt.close();
         }
         catch(SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-        return new Spitter(tempId,aString);
+        return new Spitter(anId,tempUsername);
     }
 
-    public ArrayList<Spittle> getSpittersSpittlesFromDB(Spitter aSpitter){
+    public List<Spittle> getSpittersSpittlesFromDB(Spitter aSpitter){
         String spitterId=Integer.toString(aSpitter.getId());
         String query="SELECT * FROM `spittles` WHERE SpitterId='"+spitterId+"'";
         int tempId=0;
         String tempText=null;
-        ArrayList<Spittle> spittles= new ArrayList<Spittle>();
+        List<Spittle> spittles= new ArrayList<Spittle>();
         try
         {
             stmt = con.createStatement();
@@ -74,7 +75,8 @@ public class DBHandler {
             {
                 tempId = res.getInt("ID");
                 tempText = res.getString("TextValue");
-                Spittle tempSpittle = new Spittle(tempId,aSpitter.getId(),tempText);
+                Spittle tempSpittle = new Spittle(tempId,tempText);
+                tempSpittle.setSpitter(aSpitter);
                 spittles.add(tempSpittle);
             }
             stmt.close();
@@ -114,7 +116,7 @@ public class DBHandler {
         try{
             pst=con.prepareStatement("INSERT INTO spittles(ID,SpitterId,TextValue) values (?,?,?)");
             pst.setString(1,Integer.toString(aSpittle.getId()));
-            pst.setString(2,Integer.toString(aSpittle.getSpitterId()));
+            pst.setString(2,Integer.toString(aSpittle.getSpitter().getId()));
             pst.setString(3,aSpittle.getText());
             pst.executeUpdate();
             pst.close();
@@ -141,7 +143,7 @@ public class DBHandler {
         catch(SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-        return new Spittle(anId,tempSpitterId,tempText);
+        return new Spittle(anId,tempText);
     }
 
     public void updateSpittleToDB(Spittle aSpittle){

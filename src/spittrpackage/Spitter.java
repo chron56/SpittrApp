@@ -1,12 +1,12 @@
 package spittrpackage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Spitter {
 
     private int id;
     private String username;
-    private ArrayList<Spittle> spittles;
+    private List<Spittle> spittles;
 
     public Spitter(int anId, String aUsername){
         this.id = anId;
@@ -29,11 +29,11 @@ public class Spitter {
         return username;
     }
 
-    public void setSpittlesList(ArrayList<Spittle> aList){
+    public void setSpittlesList(List<Spittle> aList){
         this.spittles = aList;
     }
 
-    public ArrayList<Spittle> getSpittlesList(){
+    public List<Spittle> getSpittlesList(){
         return spittles;
     }
 }
