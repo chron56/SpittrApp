@@ -1,13 +1,14 @@
 package spittrpackage;
 
-import spittrpackage.entities.Spitter;
-import spittrpackage.entities.Spittle;
+import spittrpackage.domain.Spitter;
+import spittrpackage.domain.Spittle;
 import spittrpackage.persistence.*;
+import spittrpackage.service.SpittrServiceImpl;
 
 public class SpittrApp {
 
     public static void main(String[] args) {
-        SpittrDao mydao = new SpittrDaoJpaImpl();
+        SpittrDao mydao = new SpittrDaoHibernateImpl();
         SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
         aService.init();
         //add
@@ -42,8 +43,8 @@ public class SpittrApp {
         spittle2.setText("chronarakis text");
         aService.updateSpittle(spittle2);
         //delete
-        aService.deleteSpitter(spitter);
         aService.deleteSpittle(spittle3);
+        aService.deleteSpitter(spitter);
         aService.close();
     }
 }

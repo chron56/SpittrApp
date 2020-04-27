@@ -1,4 +1,4 @@
-package spittrpackage.entities;
+package spittrpackage.domain;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +9,7 @@ public class Spitter {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Username")
     private String username;

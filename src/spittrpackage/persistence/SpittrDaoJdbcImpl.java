@@ -1,7 +1,7 @@
 package spittrpackage.persistence;
 
-import spittrpackage.entities.Spitter;
-import spittrpackage.entities.Spittle;
+import spittrpackage.domain.Spitter;
+import spittrpackage.domain.Spittle;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;

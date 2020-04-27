@@ -1,4 +1,4 @@
-package spittrpackage.entities;
+package spittrpackage.domain;
 
 import javax.persistence.*;
 
@@ -8,6 +8,7 @@ public class Spittle {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="TextValue")
     private String text;

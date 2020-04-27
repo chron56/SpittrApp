@@ -10,8 +10,8 @@
         <property name="connection.password">userpassword</property>
         <property name="show_sql">true</property>
 
-        <mapping class="spittrpackage.entities.Spitter" />
-        <mapping class="spittrpackage.entities.Spittle" />
+        <mapping class="spittrpackage.domain.Spitter" />
+        <mapping class="spittrpackage.domain.Spittle" />
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

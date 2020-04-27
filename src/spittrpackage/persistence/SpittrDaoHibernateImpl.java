@@ -5,11 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import spittrpackage.entities.Spitter;
-import spittrpackage.entities.Spittle;
+import spittrpackage.domain.Spitter;
+import spittrpackage.domain.Spittle;
 import java.util.List;
 
-public class SpittrDaoJpaImpl implements SpittrDao{
+public class SpittrDaoHibernateImpl implements SpittrDao{
 
     protected SessionFactory sessionFactory;
 
