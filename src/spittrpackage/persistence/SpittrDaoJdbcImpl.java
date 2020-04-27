@@ -1,10 +1,12 @@
-package spittrpackage;
+package spittrpackage.persistence;
 
+import spittrpackage.entities.Spitter;
+import spittrpackage.entities.Spittle;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SpittrDaoImpl implements SpittrDao {
+public class SpittrDaoJdbcImpl implements SpittrDao {
 
     private String url="jdbc:mysql://localhost/spitterdb?user=user";
     private Connection con;
@@ -29,7 +31,6 @@ public class SpittrDaoImpl implements SpittrDao {
             System.err.println("SQLException: "+ex.getMessage());
         }
     }
-
 
     public void addSpitterToDB(Spitter aSpitter){
         try{
@@ -111,7 +112,6 @@ public class SpittrDaoImpl implements SpittrDao {
         }
     }
 
-
     public void addSpittleToDB(Spittle aSpittle){
         try{
             pst=con.prepareStatement("INSERT INTO spittles(ID,SpitterId,TextValue) values (?,?,?)");
@@ -168,4 +168,5 @@ public class SpittrDaoImpl implements SpittrDao {
             System.err.println("SQLException: "+ex.getMessage());
         }
     }
+
 }

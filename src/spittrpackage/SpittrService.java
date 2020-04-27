@@ -1,10 +1,14 @@
 package spittrpackage;
 
+import spittrpackage.entities.Spitter;
+import spittrpackage.entities.Spittle;
 import java.util.List;
 
 public interface SpittrService {
 
     void init();
+
+    void close();
 
     void addSpitter(Spitter aSpitter);
 
@@ -23,7 +27,5 @@ public interface SpittrService {
     void deleteSpitter(Spitter aSpitter);
 
     void deleteSpittle(Spittle aSpittle);
-
-    void close();
 
 }

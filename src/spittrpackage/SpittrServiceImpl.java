@@ -1,5 +1,8 @@
 package spittrpackage;
 
+import spittrpackage.entities.Spitter;
+import spittrpackage.entities.Spittle;
+import spittrpackage.persistence.SpittrDao;
 import java.util.List;
 
 public class SpittrServiceImpl implements SpittrService {
@@ -13,6 +16,11 @@ public class SpittrServiceImpl implements SpittrService {
     public void init(){
         mydao.init();
     }
+
+    public void close(){
+        mydao.close();
+    }
+
     public void addSpitter(Spitter aSpitter){
         mydao.addSpitterToDB(aSpitter);
     }
@@ -47,10 +55,6 @@ public class SpittrServiceImpl implements SpittrService {
 
     public void deleteSpittle(Spittle aSpittle){
         mydao.deleteSpittleFromDB(aSpittle);
-    }
-
-    public void close(){
-        mydao.close();
     }
 
 }

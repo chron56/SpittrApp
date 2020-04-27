@@ -1,12 +1,23 @@
-package spittrpackage;
+package spittrpackage.entities;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "spitters")
 public class Spitter {
 
+    @Id
+    @Column(name = "ID")
     private int id;
+    @Column(name = "Username")
     private String username;
+    @OneToMany(mappedBy = "spitter",fetch = FetchType.EAGER)
     private List<Spittle> spittles;
+
+    public Spitter(){
+
+    }
 
     public Spitter(int anId, String aUsername){
         this.id = anId;
@@ -36,4 +47,5 @@ public class Spitter {
     public List<Spittle> getSpittlesList(){
         return spittles;
     }
+
 }

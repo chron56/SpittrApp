@@ -1,8 +1,11 @@
-package spittrpackage;
+package spittrpackage.persistence;
 
+import spittrpackage.entities.Spitter;
+import spittrpackage.entities.Spittle;
 import java.util.List;
 
 public interface SpittrDao {
+
     void init();
 
     void close();
@@ -24,4 +27,5 @@ public interface SpittrDao {
     void updateSpittleToDB(Spittle aSpittle);
 
     void deleteSpittleFromDB(Spittle aSpittle);
+
 }

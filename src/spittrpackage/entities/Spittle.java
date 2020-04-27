@@ -1,10 +1,23 @@
-package spittrpackage;
+package spittrpackage.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "spittles")
 public class Spittle {
 
+    @Id
+    @Column(name = "ID")
     private int id;
+    @Column(name="TextValue")
     private String text;
+    @ManyToOne
+    @JoinColumn(name="SpitterID")
     private Spitter spitter;
+
+    public Spittle(){
+
+    }
 
     public Spittle(int anId, String aText){
         this.id = anId;
@@ -34,4 +47,5 @@ public class Spittle {
     public String getText(){
         return text;
     }
+
 }

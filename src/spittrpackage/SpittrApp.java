@@ -1,11 +1,13 @@
 package spittrpackage;
 
+import spittrpackage.entities.Spitter;
+import spittrpackage.entities.Spittle;
+import spittrpackage.persistence.*;
+
 public class SpittrApp {
 
-    public static void main(String[] args)
-    {
-
-        SpittrDao mydao = new SpittrDaoImpl();
+    public static void main(String[] args) {
+        SpittrDao mydao = new SpittrDaoJpaImpl();
         SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
         aService.init();
         //add
@@ -23,27 +25,25 @@ public class SpittrApp {
         aService.addSpittle(spittle2);
         aService.addSpittle(spittle3);
         //get
-        spitter = aService.getSpitter(2);
-        if(spitter.getId() != 0) {
-            System.out.println("The selected spitter exists");
-            System.out.println("spitter's username is " + (spitter.getUsername()));
-            System.out.println("spitter's spittles are :");
-            spitter.setSpittlesList(aService.getSpittersSpittles(spitter));
-            for(Spittle aSpittle : spitter.getSpittlesList()) {
-                System.out.println(aSpittle.getText());
-            }
+        int spitterId=2;
+        spitter = aService.getSpitter(spitterId);
+        System.out.println("Spitter with id="+spitterId+" has "+(spitter.getUsername())+" as username");
+        System.out.println("Spitter with id="+spitterId+" has the following spittles");
+        spitter.setSpittlesList(aService.getSpittersSpittles(spitter));
+        for(Spittle aSpittle : spitter.getSpittlesList()) {
+            System.out.println(aSpittle.getText());
         }
-        spittle2 = aService.getSpittle(2);
-        System.out.println("spittle2 text is "+ spittle2.getText());
+        int spittleId=2;
+        spittle2 = aService.getSpittle(spittleId);
+        System.out.println("Spittle with id="+spittleId+" : "+spittle2.getText());
         //update
         spitter.setUsername("chronarakis user");
         aService.updateSpitter(spitter);
         spittle2.setText("chronarakis text");
         aService.updateSpittle(spittle2);
         //delete
-        aService.deleteSpitter(spitter2);
+        aService.deleteSpitter(spitter);
         aService.deleteSpittle(spittle3);
         aService.close();
     }
-
 }
