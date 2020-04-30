@@ -20,6 +20,10 @@ public interface SpittrService {
 
     List<Spittle> getSpittersSpittles(Spitter aSpitter);
 
+    List<Spitter> getAllSpitters();
+
+    List<Spittle> getAllSpittles();
+
     void updateSpitter(Spitter aSpitter);
 
     void updateSpittle(Spittle aSpittle);

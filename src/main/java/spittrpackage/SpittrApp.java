@@ -26,6 +26,14 @@ public class SpittrApp {
         aService.addSpittle(spittle2);
         aService.addSpittle(spittle3);
         //get
+        System.out.println("List of Spitters");
+        for(Spitter aSpitter : aService.getAllSpitters()) {
+            System.out.println(aSpitter.getUsername());
+        }
+        System.out.println("List of Spittles");
+        for(Spittle aSpittle : aService.getAllSpittles()) {
+            System.out.println(aSpittle.getText());
+        }
         int spitterId=2;
         spitter = aService.getSpitter(spitterId);
         System.out.println("Spitter with id="+spitterId+" has "+(spitter.getUsername())+" as username");

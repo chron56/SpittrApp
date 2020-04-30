@@ -1,5 +1,6 @@
 package spittrpackage.persistence;
 
+import org.hibernate.Session;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import java.sql.*;
@@ -89,6 +90,11 @@ public class SpittrDaoJdbcImpl implements SpittrDao {
         return spittles;
     }
 
+    public List<Spitter> getAllSpittersFromDB() {
+        //not implemented
+        return null;
+    }
+
     public void updateSpitterToDB(Spitter aSpitter){
         try{
             pst=con.prepareStatement("UPDATE spitters SET Username=? WHERE ID='"+Integer.toString(aSpitter.getId())+"'");
@@ -144,6 +150,11 @@ public class SpittrDaoJdbcImpl implements SpittrDao {
             System.err.println("SQLException: " + ex.getMessage());
         }
         return new Spittle(anId,tempText);
+    }
+
+    public List<Spittle> getAllSpittlesFromDB() {
+        //not implemented
+        return null;
     }
 
     public void updateSpittleToDB(Spittle aSpittle){

@@ -16,6 +16,8 @@ public interface SpittrDao {
 
     List<Spittle> getSpittersSpittlesFromDB(Spitter aSpitter);
 
+    List<Spitter> getAllSpittersFromDB();
+
     void updateSpitterToDB(Spitter aSpitter);
 
     void deleteSpitterFromDB(Spitter aSpitter);
@@ -23,6 +25,8 @@ public interface SpittrDao {
     void addSpittleToDB(Spittle aSpittle);
 
     Spittle getSpittleFromDB(int anId);
+
+    List<Spittle> getAllSpittlesFromDB();
 
     void updateSpittleToDB(Spittle aSpittle);
 

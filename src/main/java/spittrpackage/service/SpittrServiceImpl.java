@@ -39,6 +39,14 @@ public class SpittrServiceImpl implements SpittrService {
         return mydao.getSpittleFromDB(aSpittleId);
     }
 
+    public List<Spitter> getAllSpitters(){
+        return mydao.getAllSpittersFromDB();
+    }
+
+    public List<Spittle> getAllSpittles(){
+        return mydao.getAllSpittlesFromDB();
+    }
+
     public List<Spittle> getSpittersSpittles(Spitter aSpitter){
         return mydao.getSpittersSpittlesFromDB(aSpitter);
     }

@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import java.util.List;
+import java.util.ArrayList;
 
 public class SpittrDaoHibernateImpl implements SpittrDao{
 
@@ -47,6 +48,14 @@ public class SpittrDaoHibernateImpl implements SpittrDao{
         return aSpitter.getSpittlesList();
     }
 
+    public List<Spitter> getAllSpittersFromDB() {
+        List<Spitter> spitters = new ArrayList<Spitter>();
+        Session session = sessionFactory.openSession();
+        spitters = session.createQuery("from Spitter").list();
+        session.close();
+        return spitters;
+    }
+
     public void updateSpitterToDB(Spitter aSpitter){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -76,6 +85,14 @@ public class SpittrDaoHibernateImpl implements SpittrDao{
         Spittle aSpittle = session.get(Spittle.class, anId);
         session.close();
         return aSpittle;
+    }
+
+    public List<Spittle> getAllSpittlesFromDB() {
+        List<Spittle> spittles = new ArrayList<Spittle>();
+        Session session = sessionFactory.openSession();
+        spittles = session.createQuery("from Spittle").list();
+        session.close();
+        return spittles;
     }
 
     public void updateSpittleToDB(Spittle aSpittle){
