@@ -9,13 +9,16 @@
 </head>
 <body>
     <div class="container">
+        <div class="jumbotron" style="text-align:center" >
+            <h1>Spittr App</h1>
+        </div>
         <h1>Spittle</h1>
         <div class="well">
             <form action="SpittleController" method="post">
                 <div class="form-group row">
                     <label for="spittleId" class="col-2 col-form-label">Spittle ID</label>
                     <div class="col-10">
-                        <input type="text" class="form-control" name="spittleId" id="spittleId" value="<c:out value="${spittle.id}" />" readonly="readonly" placeholder="Spittle ID" />
+                        <input class="form-control" type="text" name="spittleId" id="spittleId" value="<c:out value="${spittle.id}" />" readonly="readonly" placeholder="Spittle ID" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -25,7 +28,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" name="todo" value="updateSpittle" class="btn btn-success">Update Spittle</button>
+                    <button type="submit" name="action" value="updateSpittle" class="btn btn-success">Update Spittle</button>
                 </div>
             </form>
         </div>

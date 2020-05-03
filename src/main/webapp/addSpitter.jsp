@@ -9,6 +9,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="jumbotron" style="text-align:center" >
+            <h1>Spittr App</h1>
+        </div>
         <h1>Spitter</h1>
         <div class="well">
             <form action="SpittleController" method="post">
@@ -19,7 +22,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" name="todo" value="addSpitter" class="btn btn-success">Add Spitter</button>
+                    <button type="submit" name="action" value="addSpitter" class="btn btn-success">Add Spitter</button>
                 </div>
             </form>
         </div>

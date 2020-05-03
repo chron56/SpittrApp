@@ -9,12 +9,15 @@
 </head>
 <body>
     <div class="container">
+        <div class="jumbotron" style="text-align:center" >
+            <h1>Spittr App</h1>
+        </div>
         <h1>Spittle</h1>
         <div class="well">
             <form action="SpittleController" method="post">
                 <div class="form-group row">
                     <label for="spitterId">Choose Spitter :</label>
-                    <select class="form-control" name="spitterId" id="spitterId" for="spitterId">
+                    <select class="form-control" name="spitterId" id="spitterId" >
                         <c:forEach items="${spitters}" var="spitter">
                             <option value="<c:out value="${spitter.id}" />"><c:out value="${spitter.username}" /></option>
                         </c:forEach>
@@ -23,15 +26,14 @@
                 <div class="form-group row">
                     <label for="spittleText" class="col-2 col-form-label">Spittle Text</label>
                     <div class="col-10">
-                        <input class="form-control" type="spittleText" name="spittleText" id="spittleText" placeholder="Spittle Text">
+                        <input class="form-control" type="text" name="spittleText" id="spittleText" placeholder="Spittle Text">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" name="todo" value="addSpittle" class="btn btn-success">Add Spittle</button>
+                    <button type="submit" name="action" value="addSpittle" class="btn btn-success">Add Spittle</button>
                 </div>
             </form>
         </div>
-
     </div>
 </body>
 </html>

@@ -9,7 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>Spittles List</h1>
+        <div class="jumbotron" style="text-align:center" >
+            <h1>Spittr App</h1>
+        </div>
+        <h1>List of Spittles</h1>
+        <form action="SpittleController" method="post">
+            <input type="hidden" id="action" name="action" value="selectSpitter">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-6 form-group row">
+                    <select class="form-control" name="spitterId" id="spitterId" onchange="this.form.submit()">
+                        <option disabled selected value> -- Filter Spittles by Spitter -- </option>
+                        <c:forEach items="${spitters}" var="spitter">
+                            <option value="<c:out value="${spitter.id}" />"><c:out value="${spitter.username}" /></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" name="spitterId" value="0" class="btn btn-success">All Spittles</button>
+                </div>
+            </div>
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -33,9 +52,13 @@
             </c:forEach>
             </tbody>
         </table>
-        <div class="btn-group" role="group" >
-            <a href="SpittleController?action=addSpittle" class="btn btn-info" role="button">Add Spittle</a>
-            <a href="SpittleController?action=addSpitter" class="btn btn-primary" role="button">Add Spitter</a>
+        <div class="col-sm-11 col-sm-offset-1 hid">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-4 text-center">
+                    <a href="SpittleController?action=addSpittle" class="btn btn-info" role="button">Add Spittle</a>
+                    <a href="SpittleController?action=addSpitter" class="btn btn-primary" role="button">Add Spitter</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>

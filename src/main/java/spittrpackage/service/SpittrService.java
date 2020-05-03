@@ -2,34 +2,32 @@ package spittrpackage.service;
 
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
+import spittrpackage.exceptions.SpittrServiceException;
+
 import java.util.List;
 
 public interface SpittrService {
 
-    void init();
+    void addSpitter(Spitter aSpitter) throws SpittrServiceException;
 
-    void close();
+    void addSpittle(Spittle aSpittle) throws SpittrServiceException;
 
-    void addSpitter(Spitter aSpitter);
+    Spitter getSpitter(int aSpitterId) throws SpittrServiceException;
 
-    void addSpittle(Spittle aSpittle);
+    Spittle getSpittle(int aSpittleId) throws SpittrServiceException;
 
-    Spitter getSpitter(int aSpitterId);
+    List<Spittle> getSpittersSpittles(Spitter aSpitter) throws SpittrServiceException;
 
-    Spittle getSpittle(int aSpittleId);
+    List<Spitter> getAllSpitters() throws SpittrServiceException;
 
-    List<Spittle> getSpittersSpittles(Spitter aSpitter);
+    List<Spittle> getAllSpittles() throws SpittrServiceException;
 
-    List<Spitter> getAllSpitters();
+    void updateSpitter(Spitter aSpitter) throws SpittrServiceException;
 
-    List<Spittle> getAllSpittles();
+    void updateSpittle(Spittle aSpittle) throws SpittrServiceException;
 
-    void updateSpitter(Spitter aSpitter);
+    void deleteSpitter(Spitter aSpitter) throws SpittrServiceException;
 
-    void updateSpittle(Spittle aSpittle);
-
-    void deleteSpitter(Spitter aSpitter);
-
-    void deleteSpittle(Spittle aSpittle);
+    void deleteSpittle(Spittle aSpittle) throws SpittrServiceException;
 
 }

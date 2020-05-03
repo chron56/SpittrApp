@@ -1,115 +1,111 @@
 package controllers;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.*;
 import javax.servlet.*;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
+import spittrpackage.exceptions.SpittrServiceException;
 import spittrpackage.persistence.SpittrDao;
 import spittrpackage.persistence.SpittrDaoHibernateImpl;
 import spittrpackage.service.SpittrServiceImpl;
-import java.util.List;
 
 public class SpittleController extends HttpServlet {
 
-    public void doGet (HttpServletRequest request,
-                       HttpServletResponse response)
-            throws ServletException, IOException
-    {
+    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        SpittrDao mydao = new SpittrDaoHibernateImpl();
+        SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
+        Spittle aSpittle;
         String action = request.getParameter("action");
+        String rdview = "";
 
-        if(action.equalsIgnoreCase("addSpittle")){
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            request.setAttribute("spitters", aService.getAllSpitters());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("addSpittle.jsp");
-            view.forward(request, response);
+        try{
+            if(action.equalsIgnoreCase("addSpittle")){
+                request.setAttribute("spitters", aService.getAllSpitters());
+                rdview = "addSpittle.jsp";
+            }
+            else if(action.equalsIgnoreCase("addSpitter")){
+                rdview = "addSpitter.jsp";
+            }
+            else if(action.equalsIgnoreCase("updateSpittle")){
+                int spittleId = Integer.parseInt(request.getParameter("spittleId"));
+                aSpittle = aService.getSpittle(spittleId);
+                request.setAttribute("spittle",aSpittle);
+                rdview = "updateSpittle.jsp";
+            }
+            else if(action.equalsIgnoreCase("deleteSpittle")){
+                int spittleId = Integer.parseInt(request.getParameter("spittleId"));
+                aSpittle = aService.getSpittle(spittleId);
+                aService.deleteSpittle(aSpittle);
+                request.setAttribute("spittles", aService.getAllSpittles());
+                request.setAttribute("spitters", aService.getAllSpitters());
+                rdview = "listSpittles.jsp";
+            }
+            else if (action.equalsIgnoreCase("listSpittles")){
+                request.setAttribute("spittles", aService.getAllSpittles());
+                request.setAttribute("spitters", aService.getAllSpitters());
+                rdview = "listSpittles.jsp";
+            }
         }
-        else if(action.equalsIgnoreCase("addSpitter")){
-            RequestDispatcher view = request.getRequestDispatcher("addSpitter.jsp");
-            view.forward(request, response);
+        catch (SpittrServiceException ex) {
+            ex.printStackTrace();
         }
-        else if(action.equalsIgnoreCase("updateSpittle")){
-            int spittleId = Integer.parseInt(request.getParameter("spittleId"));
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            request.setAttribute("spittle",aService.getSpittle(spittleId));
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("updateSpittle.jsp");
-            view.forward(request, response);
-        }
-        else if(action.equalsIgnoreCase("deleteSpittle")){
-            int spittleId = Integer.parseInt(request.getParameter("spittleId"));
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            Spittle tempSpittle = aService.getSpittle(spittleId);
-            aService.deleteSpittle(tempSpittle);
-            request.setAttribute("spittles", aService.getAllSpittles());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-            view.forward(request, response);
-        }
-        else if (action.equalsIgnoreCase("listSpittles")){
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            request.setAttribute("spittles", aService.getAllSpittles());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-            view.forward(request, response);
-        }
-
+        RequestDispatcher view = request.getRequestDispatcher(rdview);
+        view.forward(request, response);
     }
 
-    public void doPost (HttpServletRequest request,
-                       HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        String todo = request.getParameter("todo");
-        if (todo.equalsIgnoreCase("updateSpittle")) {
-            int spittleId = Integer.parseInt(request.getParameter("spittleId"));
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            Spittle tempSpittle = aService.getSpittle(spittleId);
-            tempSpittle.setText(request.getParameter("spittleText"));
-            aService.updateSpittle(tempSpittle);
-            request.setAttribute("spittles", aService.getAllSpittles());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-            view.forward(request, response);
-        }
-        else if(todo.equalsIgnoreCase("addSpittle")) {
-            int spitterId = Integer.parseInt(request.getParameter("spitterId"));
-            Spittle tempSpittle =  new Spittle();
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            Spitter tempSpitter = aService.getSpitter(spitterId);
-            tempSpittle.setSpitter(tempSpitter);
-            tempSpittle.setText(request.getParameter("spittleText"));
-            aService.addSpittle(tempSpittle);
-            request.setAttribute("spittles", aService.getAllSpittles());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-            view.forward(request, response);
-        }
-        else if (todo.equalsIgnoreCase("addSpitter")) {
-            SpittrDao mydao = new SpittrDaoHibernateImpl();
-            SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
-            aService.init();
-            Spitter tempSpitter = new Spitter();
-            tempSpitter.setUsername(request.getParameter("spitterUsername"));
-            aService.addSpitter(tempSpitter);
-            request.setAttribute("spittles", aService.getAllSpittles());
-            aService.close();
-            RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-            view.forward(request, response);
-        }
+    public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        SpittrDao mydao = new SpittrDaoHibernateImpl();
+        SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
+        List<Spitter> spittersList;
+        List<Spittle> spittlesList;
+        Spittle aSpittle = new Spittle();
+        Spitter aSpitter = new Spitter();
+        String action = request.getParameter("action");
+
+        try{
+            if(action.equalsIgnoreCase("addSpittle")){
+                int spitterId = Integer.parseInt(request.getParameter("spitterId"));
+                aSpitter = aService.getSpitter(spitterId);
+                aSpittle.setSpitter(aSpitter);
+                aSpittle.setText(request.getParameter("spittleText"));
+                aService.addSpittle(aSpittle);
+                request.setAttribute("spittles", aService.getAllSpittles());
+            }
+            else if (action.equalsIgnoreCase("addSpitter")){
+                String  spitterUsername = request.getParameter("spitterUsername");
+                aSpitter.setUsername(spitterUsername);
+                aService.addSpitter(aSpitter);
+                request.setAttribute("spittles", aService.getAllSpittles());
+            }
+            else if (action.equalsIgnoreCase("updateSpittle")){
+                int spittleId = Integer.parseInt(request.getParameter("spittleId"));
+                String spittleText = request.getParameter("spittleText");
+                aSpittle = aService.getSpittle(spittleId);
+                aSpittle.setText(spittleText);
+                aService.updateSpittle(aSpittle);
+                request.setAttribute("spittles", aService.getAllSpittles());
+            }
+            else if (action.equalsIgnoreCase("selectSpitter")) {
+                int spitterId = Integer.parseInt(request.getParameter("spitterId"));
+                if (spitterId == 0){
+                    request.setAttribute("spittles", aService.getAllSpittles());
+                }
+                else{
+                    aSpitter = aService.getSpitter(spitterId);
+                    request.setAttribute("spittles", aService.getSpittersSpittles(aSpitter));
+                }
+            }
+            request.setAttribute("spitters", aService.getAllSpitters());
+        }
+        catch (SpittrServiceException ex) {
+            ex.printStackTrace();
+        }
+        RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
+        view.forward(request, response);
     }
 }
