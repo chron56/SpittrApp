@@ -12,17 +12,23 @@
         <div class="jumbotron" style="text-align:center" >
             <h1>Spittr App</h1>
         </div>
-        <h1>Spitter</h1>
+        <h1>Spittle</h1>
         <div class="well">
-            <form action="SpittleController" method="post">
+            <form  method="post">
                 <div class="form-group row">
-                    <label for="spitterUsername" class="col-2 col-form-label">Spitter Username</label>
+                    <label for="spittleId" class="col-2 col-form-label">Spittle ID</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="spitterUsername" id="spitterUsername" placeholder="Spitter Username">
+                        <input class="form-control" type="text" name="spittleId" id="spittleId" value="<c:out value="${spittle.id}" />" readonly="readonly" placeholder="Spittle ID" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="spittleText" class="col-2 col-form-label">Spittle Text</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" name="spittleText" id="spittleText" value="<c:out value="${spittle.text}"/>"  placeholder="Spittle Text">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" name="action" value="addSpitter" class="btn btn-success">Add Spitter</button>
+                    <button type="submit" name="action" value="updateSpittle" class="btn btn-success">Update Spittle</button>
                 </div>
             </form>
         </div>

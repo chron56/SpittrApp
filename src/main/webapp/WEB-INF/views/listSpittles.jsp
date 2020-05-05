@@ -13,7 +13,7 @@
             <h1>Spittr App</h1>
         </div>
         <h1>List of Spittles</h1>
-        <form action="SpittleController" method="post">
+        <form method="post">
             <input type="hidden" id="action" name="action" value="selectSpitter">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-6 form-group row">
@@ -45,18 +45,18 @@
                     <td><c:out value="${spittle.text}" /></td>
                     <td><c:out value="${spittle.spitter.username}" /></td>
                     <td>
-                        <a class="btn btn-warning" role="button" href="SpittleController?action=updateSpittle&spittleId=<c:out value="${spittle.id }"/>">Update</a>
-                        <a class="btn btn-danger" role="button" href="SpittleController?action=deleteSpittle&spittleId=<c:out value="${spittle.id}"/>">Delete</a>
+                        <a class="btn btn-warning" role="button" href="<c:url value='updateSpittle/${spittle.id}' />">Update</a>
+                        <a class="btn btn-danger" role="button" href="<c:url value='deleteSpittle/${spittle.id}' />">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-        <div class="col-sm-11 col-sm-offset-1 hid">
+        <div class="col-sm-11 col-sm-offset-1">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-4 text-center">
-                    <a href="SpittleController?action=addSpittle" class="btn btn-info" role="button">Add Spittle</a>
-                    <a href="SpittleController?action=addSpitter" class="btn btn-primary" role="button">Add Spitter</a>
+                    <a href="addSpittle" class="btn btn-info" role="button">Add Spittle</a>
+                    <a href="addSpitter" class="btn btn-primary" role="button">Add Spitter</a>
                 </div>
             </div>
         </div>

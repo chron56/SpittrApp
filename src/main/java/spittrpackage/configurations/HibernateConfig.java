@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan("spittrpackage")
 public class HibernateConfig {
 
     @Bean
@@ -38,4 +39,3 @@ public class HibernateConfig {
     }
 
 }
-

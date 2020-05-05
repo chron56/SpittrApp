@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
     <title>Spittr App</title>
@@ -12,25 +13,17 @@
         <div class="jumbotron" style="text-align:center" >
             <h1>Spittr App</h1>
         </div>
-        <h1>Spittle</h1>
+        <h1>Spitter</h1>
         <div class="well">
-            <form action="SpittleController" method="post">
+            <form method="post">
                 <div class="form-group row">
-                    <label for="spitterId">Choose Spitter :</label>
-                    <select class="form-control" name="spitterId" id="spitterId" >
-                        <c:forEach items="${spitters}" var="spitter">
-                            <option value="<c:out value="${spitter.id}" />"><c:out value="${spitter.username}" /></option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group row">
-                    <label for="spittleText" class="col-2 col-form-label">Spittle Text</label>
+                    <label for="spitterUsername" class="col-2 col-form-label">Spitter Username</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="spittleText" id="spittleText" placeholder="Spittle Text">
+                        <input class="form-control" type="text" name="spitterUsername" id="spitterUsername" placeholder="Spitter Username">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" name="action" value="addSpittle" class="btn btn-success">Add Spittle</button>
+                    <button type="submit" name="action" value="addSpitter" class="btn btn-success">Add Spitter</button>
                 </div>
             </form>
         </div>
