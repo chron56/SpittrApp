@@ -1,14 +1,14 @@
 package spittrpackage.persistence;
 
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import spittrpackage.exceptions.SpittrDaoException;
-
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+@Repository("spittrDaoJdbcImpl")
 public class SpittrDaoJdbcImpl implements SpittrDao {
 
     private String url="jdbc:mysql://localhost/spitterdb?user=user";

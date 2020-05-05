@@ -6,15 +6,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import spittrpackage.exceptions.SpittrDaoException;
-
 import java.util.List;
 import java.util.ArrayList;
 
+@Repository("spittrDaoHibernateImpl")
 public class SpittrDaoHibernateImpl implements SpittrDao{
 
+    @Autowired
     protected SessionFactory sessionFactory;
 
     public void init() throws SpittrDaoException {

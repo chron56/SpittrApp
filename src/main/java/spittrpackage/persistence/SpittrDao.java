@@ -3,7 +3,6 @@ package spittrpackage.persistence;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import spittrpackage.exceptions.SpittrDaoException;
-
 import java.util.List;
 
 public interface SpittrDao {

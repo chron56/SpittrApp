@@ -1,21 +1,22 @@
 package spittrpackage.service;
 
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.Service;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import spittrpackage.exceptions.SpittrDaoException;
 import spittrpackage.exceptions.SpittrServiceException;
 import spittrpackage.persistence.SpittrDao;
-import spittrpackage.service.SpittrService;
+
 
 import java.util.List;
 
+@Service("spittrServiceImpl")
 public class SpittrServiceImpl implements SpittrService {
 
+    @Autowired
+    @Qualifier("spittrDaoHibernateImpl")
     private SpittrDao mydao;
-
-    public SpittrServiceImpl(SpittrDao adao){
-        this.mydao = adao;
-    }
 
     public void addSpitter(Spitter aSpitter) throws SpittrServiceException {
         try{

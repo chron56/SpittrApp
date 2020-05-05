@@ -15,7 +15,7 @@ import spittrpackage.service.SpittrServiceImpl;
 public class SpittleController extends HttpServlet {
 
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+/*
         SpittrDao mydao = new SpittrDaoHibernateImpl();
         SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
         Spittle aSpittle;
@@ -54,11 +54,11 @@ public class SpittleController extends HttpServlet {
             ex.printStackTrace();
         }
         RequestDispatcher view = request.getRequestDispatcher(rdview);
-        view.forward(request, response);
+        view.forward(request, response);*/
     }
 
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+/*
         SpittrDao mydao = new SpittrDaoHibernateImpl();
         SpittrServiceImpl aService = new SpittrServiceImpl(mydao);
         List<Spitter> spittersList;
@@ -106,6 +106,6 @@ public class SpittleController extends HttpServlet {
             ex.printStackTrace();
         }
         RequestDispatcher view = request.getRequestDispatcher("listSpittles.jsp");
-        view.forward(request, response);
+        view.forward(request, response); */
     }
 }

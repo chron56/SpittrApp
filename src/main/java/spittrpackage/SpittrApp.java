@@ -11,7 +11,7 @@ import spittrpackage.service.SpittrServiceImpl;
 public class SpittrApp {
 
     public static void main(String[] args) {
-
+/*
         try {
             SpittrDao mydao = new SpittrDaoHibernateImpl();
             SpittrService aService = new SpittrServiceImpl(mydao);
@@ -62,6 +62,6 @@ public class SpittrApp {
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
         }
-
+*/
     }
 }

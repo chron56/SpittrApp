@@ -3,7 +3,6 @@ package spittrpackage.service;
 import spittrpackage.domain.Spitter;
 import spittrpackage.domain.Spittle;
 import spittrpackage.exceptions.SpittrServiceException;
-
 import java.util.List;
 
 public interface SpittrService {
