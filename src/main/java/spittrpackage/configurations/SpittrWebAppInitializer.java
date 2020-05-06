@@ -1,8 +1,8 @@
 package spittrpackage.configurations;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
-public class DispatcherServletInitConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -11,7 +11,7 @@ public class DispatcherServletInitConfig extends AbstractAnnotationConfigDispatc
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return null;
+        return new Class[] { WebConfig.class };
     }
 
     @Override
