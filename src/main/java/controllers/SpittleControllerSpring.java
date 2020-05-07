@@ -24,11 +24,12 @@ public class SpittleControllerSpring {
         try {
             model.addAttribute("spittles", aService.getAllSpittles());
             model.addAttribute("spitters", aService.getAllSpitters());
+            return "listSpittles";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "listSpittles";
     }
 
     @RequestMapping(value = { "/addSpitter" }, method = RequestMethod.GET)
@@ -40,11 +41,12 @@ public class SpittleControllerSpring {
     public String addSpittle(ModelMap model) {
         try{
             model.addAttribute("spitters", aService.getAllSpitters());
+            return "addSpittle";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "addSpittle";
     }
 
     @RequestMapping(value = { "/updateSpittle/{id}" }, method = RequestMethod.GET)
@@ -53,11 +55,12 @@ public class SpittleControllerSpring {
         try{
             Spittle aSpittle = aService.getSpittle(spittleId);
             model.addAttribute("spittle",aSpittle);
+            return "updateSpittle";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "updateSpittle";
     }
 
     @RequestMapping(value = { "/deleteSpittle/{id}" }, method = RequestMethod.GET)
@@ -66,11 +69,12 @@ public class SpittleControllerSpring {
         try{
             Spittle aSpittle = aService.getSpittle(spittleId);
             aService.deleteSpittle(aSpittle);
+            return "redirect:/list";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "redirect:/list";
     }
 
     @RequestMapping(value = "/addSpitter", method = RequestMethod.POST)
@@ -80,11 +84,12 @@ public class SpittleControllerSpring {
             Spitter aSpitter =  new Spitter();
             aSpitter.setUsername(spitterUsername);
             aService.addSpitter(aSpitter);
+            return "redirect:/list";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "redirect:/list";
     }
 
     @RequestMapping(value = "/addSpittle", method = RequestMethod.POST)
@@ -96,11 +101,12 @@ public class SpittleControllerSpring {
             aSpittle.setSpitter(aSpitter);
             aSpittle.setText(request.getParameter("spittleText"));
             aService.addSpittle(aSpittle);
+            return "redirect:/list";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "redirect:/list";
     }
 
     @RequestMapping(value = "/updateSpittle/{id}", method = RequestMethod.POST)
@@ -111,11 +117,12 @@ public class SpittleControllerSpring {
             Spittle aSpittle = aService.getSpittle(spittleId);
             aSpittle.setText(spittleText);
             aService.updateSpittle(aSpittle);
+            return "redirect:/list";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "redirect:/list";
     }
 
     @RequestMapping(value = { "/", "/list" }, method = RequestMethod.POST)
@@ -130,11 +137,12 @@ public class SpittleControllerSpring {
                 model.addAttribute("spittles", aService.getSpittersSpittles(aSpitter));
             }
             model.addAttribute("spitters", aService.getAllSpitters());
+            return "listSpittles";
         }
         catch (SpittrServiceException ex) {
             ex.printStackTrace();
+            return "error";
         }
-        return "listSpittles";
     }
 
 }

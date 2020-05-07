@@ -9,23 +9,25 @@ public interface SpittrService {
 
     void addSpitter(Spitter aSpitter) throws SpittrServiceException;
 
-    void addSpittle(Spittle aSpittle) throws SpittrServiceException;
-
     Spitter getSpitter(int aSpitterId) throws SpittrServiceException;
 
-    Spittle getSpittle(int aSpittleId) throws SpittrServiceException;
-
-    List<Spittle> getSpittersSpittles(Spitter aSpitter) throws SpittrServiceException;
+    Spitter getSpitterByUsername(String aUsername) throws SpittrServiceException;
 
     List<Spitter> getAllSpitters() throws SpittrServiceException;
 
-    List<Spittle> getAllSpittles() throws SpittrServiceException;
-
     void updateSpitter(Spitter aSpitter) throws SpittrServiceException;
 
-    void updateSpittle(Spittle aSpittle) throws SpittrServiceException;
-
     void deleteSpitter(Spitter aSpitter) throws SpittrServiceException;
+
+    void addSpittle(Spittle aSpittle) throws SpittrServiceException;
+
+    Spittle getSpittle(int aSpittleId) throws SpittrServiceException;
+
+    List<Spittle> getAllSpittles() throws SpittrServiceException;
+
+    List<Spittle> getSpittersSpittles(Spitter aSpitter) throws SpittrServiceException;
+
+    void updateSpittle(Spittle aSpittle) throws SpittrServiceException;
 
     void deleteSpittle(Spittle aSpittle) throws SpittrServiceException;
 

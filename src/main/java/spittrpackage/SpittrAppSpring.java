@@ -47,6 +47,9 @@ public class SpittrAppSpring {
         int spittleId=2;
         spittle2 = aService.getSpittle(spittleId);
         System.out.println("Spittle with id="+spittleId+" : "+spittle2.getText());
+        String username = "user2";
+        spitter = aService.getSpitterByUsername(username);
+        System.out.println("Spitter with Username="+username+" has "+spitter2.getId()+" as id");
         //update
         spitter.setUsername("chronarakis user");
         aService.updateSpitter(spitter);

@@ -1,7 +1,9 @@
 package spittrpackage.domain;
 
+import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 
+@Proxy(lazy=false)
 @Entity
 @Table(name = "spittles")
 public class Spittle {

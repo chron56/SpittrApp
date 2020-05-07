@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -52,9 +52,9 @@
             </c:forEach>
             </tbody>
         </table>
-        <div class="col-sm-11 col-sm-offset-1">
+        <div class="col-md-11 col-sm-offset-1">
             <div class="row">
-                <div class="col-sm-3 col-sm-offset-4 text-center">
+                <div class="col-md-9 col-md-offset-1 text-center">
                     <a href="addSpittle" class="btn btn-info" role="button">Add Spittle</a>
                     <a href="addSpitter" class="btn btn-primary" role="button">Add Spitter</a>
                 </div>

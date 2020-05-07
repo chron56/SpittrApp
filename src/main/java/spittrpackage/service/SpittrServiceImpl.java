@@ -1,145 +1,131 @@
 package spittrpackage.service;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import spittrpackage.domain.Spitter;
-import spittrpackage.domain.Spittle;
-import spittrpackage.exceptions.SpittrDaoException;
+import spittrpackage.domain.*;
 import spittrpackage.exceptions.SpittrServiceException;
-import spittrpackage.persistence.SpittrDao;
-
-
+import spittrpackage.persistence.SpitterRepository;
+import spittrpackage.persistence.SpittleRepository;
 import java.util.List;
 
 @Service("spittrServiceImpl")
 public class SpittrServiceImpl implements SpittrService {
 
     @Autowired
-    @Qualifier("spittrDaoHibernateImpl")
-    private SpittrDao mydao;
+    private SpitterRepository spitterDao;
 
-    public void addSpitter(Spitter aSpitter) throws SpittrServiceException {
+    @Autowired
+    private SpittleRepository spittleDao;
+
+    public void addSpitter(Spitter aSpitter) throws SpittrServiceException{
         try{
-            mydao.init();
-            mydao.addSpitterToDB(aSpitter);
-            mydao.close();
+            spitterDao.save(aSpitter);
         }
-        catch(SpittrDaoException ex){
+       catch(DataAccessException ex){
+           throw new SpittrServiceException("Exception", ex);
+        }
+    }
+
+    public Spitter getSpitter(int aSpitterId) throws SpittrServiceException{
+        try{
+            return spitterDao.getOne(aSpitterId);
+        }
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
-    public void addSpittle(Spittle aSpittle) throws SpittrServiceException {
+    public Spitter getSpitterByUsername(String aUsername) throws SpittrServiceException{
         try{
-            mydao.init();
-            mydao.addSpittleToDB(aSpittle);
-            mydao.close();
+            return spitterDao.getByUsername(aUsername);
         }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
-    public Spitter getSpitter(int aSpitterId) throws SpittrServiceException {
+    public List<Spitter> getAllSpitters() throws SpittrServiceException{
         try{
-            mydao.init();
-            Spitter spitter = mydao.getSpitterFromDB(aSpitterId);
-            mydao.close();
-            return spitter;
+            return spitterDao.findAll();
         }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
-    public Spittle getSpittle(int aSpittleId) throws SpittrServiceException {
+    public void updateSpitter(Spitter aSpitter) throws SpittrServiceException{
         try{
-            mydao.init();
-            Spittle spittle = mydao.getSpittleFromDB(aSpittleId);
-            mydao.close();
-            return spittle;
+            Spitter temp = spitterDao.getOne(aSpitter.getId());
+            temp.setUsername(aSpitter.getUsername());
+            spitterDao.save(temp);
         }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
-    public List<Spitter> getAllSpitters() throws SpittrServiceException {
+    public void deleteSpitter(Spitter aSpitter) throws SpittrServiceException{
         try{
-            mydao.init();
-            List<Spitter> spitters = mydao.getAllSpittersFromDB();
-            mydao.close();
-            return spitters;
+            spitterDao.delete(aSpitter);
         }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
-    public List<Spittle> getAllSpittles() throws SpittrServiceException{
+    public void addSpittle(Spittle aSpittle) throws SpittrServiceException{
         try{
-            mydao.init();
-            List<Spittle> spittles = mydao.getAllSpittlesFromDB();
-            mydao.close();
-            return spittles;
+            spittleDao.save(aSpittle);
         }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
+            throw new SpittrServiceException("Exception", ex);
+        }
+    }
+
+    public Spittle getSpittle(int aSpittleId) throws SpittrServiceException{
+        try{
+            return spittleDao.getOne(aSpittleId);
+        }
+        catch(DataAccessException ex){
+            throw new SpittrServiceException("Exception", ex);
+        }
+    }
+
+    public List<Spittle> getAllSpittles()  throws SpittrServiceException{
+        try{
+            return spittleDao.findAll();
+        }
+        catch(DataAccessException ex){
+            throw new SpittrServiceException("Exception", ex);
+        }
+    }
+
+    public void updateSpittle(Spittle aSpittle)  throws SpittrServiceException{
+        try{
+            Spittle temp = spittleDao.getOne(aSpittle.getId());
+            temp.setText(aSpittle.getText());
+            spittleDao.save(temp);
+        }
+        catch(DataAccessException ex){
+            throw new SpittrServiceException("Exception", ex);
+        }
+    }
+
+    public void deleteSpittle(Spittle aSpittle) throws SpittrServiceException{
+        try{
+            spittleDao.delete(aSpittle);
+        }
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
 
     public List<Spittle> getSpittersSpittles(Spitter aSpitter) throws SpittrServiceException {
         try{
-            mydao.init();
-            List<Spittle> spittles = mydao.getSpittersSpittlesFromDB(aSpitter);
-            mydao.close();
-            return spittles;
+            return spittleDao.getSpittersSpittlesFromDB(aSpitter.getId());
         }
-        catch(SpittrDaoException ex){
-            throw new SpittrServiceException("Exception", ex);
-        }
-    }
-
-    public void updateSpitter(Spitter aSpitter) throws SpittrServiceException {
-       try{
-           mydao.init();
-           mydao.updateSpitterToDB(aSpitter);
-           mydao.close();
-       }
-       catch(SpittrDaoException ex){
-            throw new SpittrServiceException("Exception", ex);
-       }
-    }
-
-    public void updateSpittle(Spittle aSpittle) throws SpittrServiceException {
-        try{
-            mydao.init();
-            mydao.updateSpittleToDB(aSpittle);
-            mydao.close();
-        }
-        catch(SpittrDaoException ex){
-            throw new SpittrServiceException("Exception", ex);
-        }
-    }
-
-    public void deleteSpitter(Spitter aSpitter) throws SpittrServiceException {
-        try{
-            mydao.init();
-            mydao.deleteSpitterFromDB(aSpitter);
-            mydao.close();
-        }
-        catch(SpittrDaoException ex){
-            throw new SpittrServiceException("Exception", ex);
-        }
-    }
-
-    public void deleteSpittle(Spittle aSpittle)throws SpittrServiceException {
-        try{
-            mydao.init();
-            mydao.deleteSpittleFromDB(aSpittle);
-            mydao.close();
-        }
-        catch(SpittrDaoException ex){
+        catch(DataAccessException ex){
             throw new SpittrServiceException("Exception", ex);
         }
     }
